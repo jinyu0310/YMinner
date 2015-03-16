@@ -1,0 +1,5 @@
+package Classifier
+
+class NaiveBayes {
+
+}
