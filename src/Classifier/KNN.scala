@@ -46,7 +46,5 @@ class KNN(k:Int, thread:Int,measure:DistanceMeasure) extends Classifier {
       this.trainLabels = trainLabels
       return 
   }
-
-
 }
 
