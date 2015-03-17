@@ -24,7 +24,7 @@ class KNN(k:Int, thread:Int,measure:DistanceMeasure) extends Classifier {
       
       for (i <- 0l until instances.getRowCount()){
           var sortRows = distances.selectRows(Ret.LINK, i)
-          val sortIndex = sortRows.toDoubleArray()(0).argSort()
+          val sortIndex = sortRows.toDoubleArray()(0).argSort
           import scala.collection.mutable.Map  
           val count = Map[Long,Int]()
           for(index <- sortIndex)

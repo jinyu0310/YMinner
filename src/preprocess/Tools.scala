@@ -10,6 +10,8 @@ import org.ujmp.core.util.EuclidianDistance
 import org.ujmp.core.util.EuclidianDistance
 import org.ujmp.core.util.DistanceMeasure
 import YCategory.MarixExtend._
+import scala.collection.mutable.ArrayBuffer
+import scala.actors.threadpool.helpers.Utils
 
 object Tools {
   def normMatrix(mat: Matrix): Matrix = {
@@ -21,9 +23,44 @@ object Tools {
     return normMat
   }
 
+  /**
+   * repeat a matrix
+   * */
   def repmat(mat: Matrix, r: Long, c: Long): Matrix = {
     val repmat: Repmat = new Repmat(mat, r, c)
     return repmat.calcNew()
+  }
+  
+  /**
+   * @Description:
+   *  Randomly split original matrix into train set and test set
+   * 
+   * @Parameter:
+   *  Ratio, size of trainset
+   * 
+   * @Return:
+   *  (trainMatrix,trainLabels,testMatrix,testLabels)
+   */
+  def splitData(mat:Matrix,label:Array[Long],ratio:Double):(Matrix,Array[Long],Matrix,Array[Long]) = {
+    var trainIndecies = ArrayBuffer[Long]()
+    var testIndecies  = ArrayBuffer[Long]()
+    var trainLabels = ArrayBuffer[Long]()
+    var testLabels = ArrayBuffer[Long]()
+    
+    for(i <-0l until mat.getRowCount){
+      if(scala.util.Random.nextDouble()<=ratio){
+        trainIndecies += i
+        trainLabels+=label(i.toInt)
+      }else{
+        testIndecies += i
+        testLabels+=label(i.toInt)
+      }
+    }
+    
+    var trainMat = mat.selectRows(Ret.NEW, trainIndecies:_*)
+    var testMat =  mat.selectRows(Ret.NEW, testIndecies:_*)
+    
+    return (trainMat,trainLabels.toArray,testMat,testLabels.toArray)
   }
 
   /**
