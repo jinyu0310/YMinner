@@ -41,19 +41,19 @@ object Tools {
    * @Return:
    *  (trainMatrix,trainLabels,testMatrix,testLabels)
    */
-  def splitData(mat:Matrix,label:Array[Long],ratio:Double):(Matrix,Array[Long],Matrix,Array[Long]) = {
+  def splitData(mat:Matrix,labels:Array[String],ratio:Double):(Matrix,Array[String],Matrix,Array[String]) = {
     var trainIndecies = ArrayBuffer[Long]()
     var testIndecies  = ArrayBuffer[Long]()
-    var trainLabels = ArrayBuffer[Long]()
-    var testLabels = ArrayBuffer[Long]()
+    var trainLabels = ArrayBuffer[String]()
+    var testLabels = ArrayBuffer[String]()
     
-    for(i <-0l until mat.getRowCount){
+    for(i <-0 until mat.getRowCount.toInt){
       if(scala.util.Random.nextDouble()<=ratio){
         trainIndecies += i
-        trainLabels+=label(i.toInt)
+        trainLabels += labels(i)
       }else{
         testIndecies += i
-        testLabels+=label(i.toInt)
+        testLabels += labels(i)
       }
     }
     

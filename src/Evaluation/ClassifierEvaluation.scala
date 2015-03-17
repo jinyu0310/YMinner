@@ -1,9 +1,10 @@
-package Classifier
+package Evaluation
 
 import org.ujmp.core.Matrix
+import Classifier.Classifier
 
 object ClassifierEvaluation {
-    def evaluation(train:Matrix,trainLabel:Array[Long],test:Matrix,testLabel:Array[Long],classifier:Classifier):Unit = {
+    def evaluation(train:Matrix,trainLabel:Array[String],test:Matrix,testLabel:Array[String],classifier:Classifier):Unit = {
         classifier.train(train, trainLabel)
         var predicate =  classifier.classInstances(test)
         var correct = 0
