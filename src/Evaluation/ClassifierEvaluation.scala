@@ -2,10 +2,14 @@ package Evaluation
 
 import org.ujmp.core.Matrix
 import Classifier.Classifier
+import preprocess.Tools
 
 object ClassifierEvaluation {
     def evaluation(train:Matrix,trainLabel:Array[String],test:Matrix,testLabel:Array[String],classifier:Classifier):Unit = {
-        classifier.train(train, trainLabel)
+        val normTrainMat =  Tools.normMatrix(train)
+        val normTestMat  =  Tools.normMatrixWithTrain(test, train)
+
+        classifier.train(normTrainMat, trainLabel)
         var predicate =  classifier.classInstances(test)
         var correct = 0
         for( i <- 0 until testLabel.length){

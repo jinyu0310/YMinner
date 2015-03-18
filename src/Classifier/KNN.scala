@@ -16,18 +16,20 @@ class KNN(k:Int, thread:Int,measure:DistanceMeasure) extends Classifier {
   private var trainLabels : Array[String] = null
   private var distance:DistanceMeasure = measure
   
-  def classInstances(instances: Matrix): Array[String] = {
-    
+  def classInstances(dataset: Matrix): Array[String] = {
+      val instances = dataset
       val distances = Tools.allDistance(instances, this.trainMat, distance)
     
       val result = new Array[String]((instances.getRowCount()).toInt)
       
       for (i <- 0l until instances.getRowCount()){
           var sortRows = distances.selectRows(Ret.LINK, i)
+          var sorts = sortRows.toDoubleArray()(0)
+          var zipsort = sorts.zipWithIndex.sortBy(_._1)
           val sortIndex = sortRows.toDoubleArray()(0).argSort
           import scala.collection.mutable.Map  
           val count = Map[String,Int]()
-          for(index <- sortIndex)
+          for(index <- sortIndex.slice(0,k))
           {
             if(! count.contains( trainLabels(index) )){
               count( trainLabels(index) ) = 0
@@ -38,6 +40,7 @@ class KNN(k:Int, thread:Int,measure:DistanceMeasure) extends Classifier {
           result(i.toInt) = count.max._1
       }
       
+      var set = result.toSet
       return result
   }
 
