@@ -1,12 +1,20 @@
-package Classifier
+package classifier
 
 import org.ujmp.core.Matrix
 
 
 
+
 abstract class  Classifier {
-	/**
-	 * trainMat: training matrix,each row is a sample
+
+  protected var trainMat : Matrix = null
+  protected var trainLabels : Array[String] = null
+  
+  def getTrainMat = trainMat
+	def getTrainLabels = trainLabels
+
+  /**
+	 * trainMat: training matrix,each row is a sample(make sure all of the entries i numeric)
 	 * trainLabels：corresponding to the class of each row in trainMat
 	 */
 	def train(trainMat:Matrix,trainLabels:Array[String])

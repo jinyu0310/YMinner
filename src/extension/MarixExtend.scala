@@ -1,4 +1,4 @@
-package YCategory
+package extension
 
 import org.ujmp.core.Matrix
 import org.ujmp.core.MatrixFactory

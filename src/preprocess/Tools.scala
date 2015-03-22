@@ -9,7 +9,7 @@ import org.ujmp.core.interfaces.DistanceMeasures
 import org.ujmp.core.util.EuclidianDistance
 import org.ujmp.core.util.EuclidianDistance
 import org.ujmp.core.util.DistanceMeasure
-import YCategory.MarixExtend._
+import extension.MarixExtend._
 import scala.collection.mutable.ArrayBuffer
 import scala.actors.threadpool.helpers.Utils
 

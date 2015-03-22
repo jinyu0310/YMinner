@@ -1,10 +1,10 @@
-package Classifier
+package classifier
 
 import org.ujmp.core.Matrix
 import org.ujmp.core.util.DistanceMeasure
 import preprocess.Tools
 import org.ujmp.core.calculation.Calculation.Ret
-import YCategory.ArrayExtend._
+import extension.ArrayExtend._
 
 /***
  * k: the k number nearest data points
@@ -12,8 +12,7 @@ import YCategory.ArrayExtend._
  */
 class KNN(k:Int, thread:Int,measure:DistanceMeasure) extends Classifier {
   
-  private var trainMat : Matrix = null
-  private var trainLabels : Array[String] = null
+
   private var distance:DistanceMeasure = measure
   
   def classInstances(dataset: Matrix): Array[String] = {
@@ -40,7 +39,6 @@ class KNN(k:Int, thread:Int,measure:DistanceMeasure) extends Classifier {
           result(i.toInt) = count.max._1
       }
       
-      var set = result.toSet
       return result
   }
 

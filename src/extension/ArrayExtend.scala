@@ -1,4 +1,4 @@
-package YCategory
+package extension
 import scala.math._
 object ArrayExtend {
 
